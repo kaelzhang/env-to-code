@@ -80,7 +80,12 @@ js('["a","b"]')
 // ]
 ```
 
-So, if environment variables contains JSON strings, it is better to set `testJSON` to `true`.
+So, if environment variables contains JSON strings, it is better to set `testJSON` to `true`:
+
+```js
+js('["a","b"]', {testJSON: true})
+// ['a', 'b']
+```
 
 ## code(s, config?)
 
