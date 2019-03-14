@@ -15,7 +15,7 @@
 
 # env-to-code
 
-The module to parse `process.env[SOME_KEY]` into JavaScript variable or JavaScript code, especially, which is useful for [`webpack.EnvironmentPlugin`](https://webpack.js.org/plugins/environment-plugin/)
+The module to parse `process.env[SOME_KEY]` into JavaScript variable or JavaScript code, especially, which is very useful for [`webpack.EnvironmentPlugin`](https://webpack.js.org/plugins/environment-plugin/)
 
 ## Install
 
