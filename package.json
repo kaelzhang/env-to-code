@@ -1,7 +1,7 @@
 {
   "name": "env-to-code",
   "version": "1.0.0",
-  "description": "env-to-code",
+  "description": "The module to parse process.env[SOME_KEY] into JavaScript variable or JavaScript code, especially, which is especially useful for webpack.EnvironmentPlugin",
   "main": "src/index.js",
   "scripts": {
     "test": "nyc ava --timeout=10s",
@@ -17,7 +17,12 @@
     "url": "git://github.com/kaelzhang/env-to-code.git"
   },
   "keywords": [
-    "env-to-code"
+    "env-to-code",
+    "process.env",
+    "environment",
+    "webpack",
+    "defineplugin",
+    "environmentplugin"
   ],
   "engines": {
     "node": ">= 6"

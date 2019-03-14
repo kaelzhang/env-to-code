@@ -66,17 +66,25 @@ exports.js = (s, {
   )
 )
 
+const isNumberString = s => String(Number(s)) === s
+
 exports.code = (s, {
   arrayDelimiter = ',',
   testJSON = false
-} = {}) => basic(
-  s,
-  stringify,
-  s => json(
+} = {}) => {
+  if (s === undefined || s === '') {
+    return stringify(s)
+  }
+
+  if (s === 'true' || s === 'false' || isNumberString(s)) {
+    return s
+  }
+
+  return json(
     s,
     testJSON,
     // If is an JSON string, just return the string
     () => s,
     s => stringify(array(s, arrayDelimiter))
   )
-)
+}

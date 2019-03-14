@@ -15,7 +15,7 @@
 
 # env-to-code
 
-<!-- description -->
+The module to parse `process.env[SOME_KEY]` into JavaScript variable or JavaScript code, especially, which is useful for [`webpack.EnvironmentPlugin`](https://webpack.js.org/plugins/environment-plugin/)
 
 ## Install
 
@@ -25,8 +25,79 @@ $ npm i env-to-code
 
 ## Usage
 
+
+```sh
+# bash
+export FOO=bar
+export BAZ=1
+export DEBUG=false
+```
+
 ```js
-import env_to_code from 'env-to-code'
+import {
+  js,
+  code
+} from 'env-to-code'
+
+js(process.env.FOO) === 'bar'       // true
+code(process.env.FOO) === '"bar"'   // true
+
+js(process.env.BAZ) === 1           // true
+
+js(process.env.DEBUG) === false     // true
+code(process.env.DEBUG) === 'false' // true
+
+// But
+JSON.stringify(process.env.DEBUG) === '"false"'  // true
+```
+
+## js(s, config?)
+
+- **s** `string` environment variable string
+- **config** `?Object` optional config
+  - **testJSON** `?boolean=false` whether to test if `s` is a JSON
+  - **arrayDelimiter** `?string=','` by default, it will try to split the env variable into array with `arrayDelimiter`. To disable this feature, set the option to `false` or `''`
+
+Parses the environment variable into JavaScript variable.
+
+```js
+js('English, Chinese')    // ['English', 'Chinese']
+js('English')             // 'English'
+
+js('English, Chinese', {
+  arrayDelimiter: false
+})
+// 'English, Chinese'
+```
+
+## code(s, config?)
+
+This method has the same arguments as `js()`, and parses `s` into JavaScript code string.
+
+So it is useful for [`webpack.EnvironmentPlugin`](https://webpack.js.org/plugins/environment-plugin/) or writing JavaScript code into files.
+
+```js
+new webpack.DefinePlugin({
+  'process.env.NODE_ENV': code(process.env.NODE_ENV),
+  'process.env.DEBUG': code(process.env.DEBUG)
+});
+```
+
+or
+
+```js
+// write.js
+fs.writeFileSync('foo.js', `module.exports = {debug:${code(process.env.DEBUG)}}`)
+```
+
+```sh
+DEBUG=true node write.js
+```
+
+And in foo.js
+
+```js
+module.exports = {debug:true}
 ```
 
 ## License
