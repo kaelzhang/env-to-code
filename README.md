@@ -55,7 +55,7 @@ JSON.stringify(process.env.DEBUG) === '"false"'  // true
 
 - **s** `string` environment variable string
 - **config** `?Object` optional config
-  - **testJSON** `?boolean=false` whether to test if `s` is a JSON
+  - **testJSON** `?boolean=false` whether to test if `s` is a JSON. `testJSON` takes effect ahead of `arrayDelimiter`.
   - **arrayDelimiter** `?string=','` by default, it will try to split the env variable into array with `arrayDelimiter`. To disable this feature, set the option to `false` or `''`
 
 Parses the environment variable into JavaScript variable.
@@ -69,6 +69,18 @@ js('English, Chinese', {
 })
 // 'English, Chinese'
 ```
+
+**PAY ATTENTION THAT** with `testJSON=false` and `arrayDelimiter=','` which are the default options, method `js()` will split JSON array into an unexpected result, for example:
+
+```js
+js('["a","b"]')
+// [
+//   '["a"',
+//   '"b"]'
+// ]
+```
+
+So, if environment variables contains JSON strings, it is better to set `testJSON` to `true`.
 
 ## code(s, config?)
 

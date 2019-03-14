@@ -1,6 +1,6 @@
 {
   "name": "env-to-code",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The module to parse process.env[SOME_KEY] into JavaScript variable or JavaScript code, especially, which is especially very useful for webpack.EnvironmentPlugin",
   "main": "src/index.js",
   "scripts": {
@@ -44,5 +44,6 @@
     "eslint": "^5.14.0"
   },
   "dependencies": {
+    "js-stringify": "^1.0.2"
   }
 }
