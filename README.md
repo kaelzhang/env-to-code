@@ -49,6 +49,10 @@ code(process.env.DEBUG) === 'false' // true
 
 // But
 JSON.stringify(process.env.DEBUG) === '"false"'  // true
+
+new webpack.DefinePlugin({
+  'process.env.DEBUG': code(process.env.DEBUG)
+})
 ```
 
 ## js(s, config?)
@@ -97,7 +101,7 @@ So it is useful for [`webpack.EnvironmentPlugin`](https://webpack.js.org/plugins
 new webpack.DefinePlugin({
   'process.env.NODE_ENV': code(process.env.NODE_ENV),
   'process.env.DEBUG': code(process.env.DEBUG)
-});
+})
 ```
 
 or
